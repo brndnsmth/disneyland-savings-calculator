@@ -18,7 +18,7 @@ const DateInput: React.FC<DateInputProps> = ({
     <div>
       <label className="font-semibold">🗓 Trip Date:</label>
       <input
-        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
+        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="date"
         value={tripDate}
         onChange={handleDateChange}
