@@ -1,5 +1,5 @@
 // App.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import DateInput from "./components/DateInput";
 import TicketInput from "./components/TicketInput";
 import DaysInput from "./components/DaysInput";
@@ -45,35 +45,46 @@ function App(): JSX.Element {
   };
 
   return (
-    <div className="App">
-      <DateInput tripDate={tripDate} setTripDate={setTripDate} />
-      <TicketInput
-        ticketCount={ticketCount}
-        setTicketCount={setTicketCount}
-        ticketPrice={ticketPrice}
-        setTicketPrice={setTicketPrice}
-      />
-      <DaysInput daysCount={daysCount} setDaysCount={setDaysCount} />
-      <NightsInput
-        nightsCount={nightsCount}
-        setNightsCount={setNightsCount}
-        hotelPrice={hotelPrice}
-        setHotelPrice={setHotelPrice}
-      />
-      {isNaN(parseFloat(calculateSavingsGoal())) ? (
-        <p>Please fill in all required fields.</p>
-      ) : (
-        <>
-          <Result savingsGoal={calculateSavingsGoal()} />
-          <TotalExpenditure
-            ticketCount={ticketCount}
-            ticketPrice={ticketPrice}
-            daysCount={daysCount}
-            nightsCount={nightsCount}
-            hotelPrice={hotelPrice}
-          />
-        </>
-      )}
+    <div className="h-screen grid grid-cols-1 content-center">
+      <div className="container mx-auto">
+        <h1 className="text-4xl font-semibold text-white mb-3">
+          Disneyland Savings Calculator
+        </h1>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+            <DateInput tripDate={tripDate} setTripDate={setTripDate} />
+            <TicketInput
+              ticketCount={ticketCount}
+              setTicketCount={setTicketCount}
+              ticketPrice={ticketPrice}
+              setTicketPrice={setTicketPrice}
+            />
+            <DaysInput daysCount={daysCount} setDaysCount={setDaysCount} />
+            <NightsInput
+              nightsCount={nightsCount}
+              setNightsCount={setNightsCount}
+              hotelPrice={hotelPrice}
+              setHotelPrice={setHotelPrice}
+            />
+          </div>
+          <div className="grid justify-items-center bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl text-center">
+            {isNaN(parseFloat(calculateSavingsGoal())) ? (
+              <p>Please fill in all required fields.</p>
+            ) : (
+              <>
+                <Result savingsGoal={calculateSavingsGoal()} />
+                <TotalExpenditure
+                  ticketCount={ticketCount}
+                  ticketPrice={ticketPrice}
+                  daysCount={daysCount}
+                  nightsCount={nightsCount}
+                  hotelPrice={hotelPrice}
+                />
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

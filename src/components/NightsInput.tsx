@@ -24,10 +24,17 @@ const NightsInput: React.FC<NightsInputProps> = ({
 
   return (
     <div>
-      <label>Number of Nights at a Hotel:</label>
-      <input type="number" value={nightsCount} onChange={handleNightsChange} />
-      <label>Hotel Price ($):</label>
+      <label className="font-semibold">🏨 Number of Nights at a Hotel:</label>
       <input
+        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        type="number"
+        value={nightsCount}
+        onChange={handleNightsChange}
+        min="0"
+      />
+      <label className="font-semibold">﹩ Hotel Price ($):</label>
+      <input
+        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
         type="number"
         value={hotelPrice}
         onChange={handleHotelPriceChange}

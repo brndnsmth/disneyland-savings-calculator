@@ -10,11 +10,15 @@ const Result: React.FC<ResultProps> = ({ savingsGoal }: ResultProps) => {
 
   return (
     <div>
-      <h2>Your Savings Goal:</h2>
+      <h2 className="text-2xl font-semibold">💰 Your Savings Goal:</h2>
       {isValidInput ? (
         <div>
-          <p>${parseFloat(savingsGoal).toFixed(2)} per week</p>
-          <p>${(parseFloat(savingsGoal) * 4).toFixed(2)} per month</p>
+          <p className="text-xl">
+            ${parseFloat(savingsGoal).toFixed(2)} per week
+          </p>
+          <p className="text-xl">
+            ${(parseFloat(savingsGoal) * 4).toFixed(2)} per month
+          </p>
         </div>
       ) : (
         <div>

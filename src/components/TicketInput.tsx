@@ -24,10 +24,17 @@ const TicketInput: React.FC<TicketInputProps> = ({
 
   return (
     <div>
-      <label>Number of Disneyland Tickets:</label>
-      <input type="number" value={ticketCount} onChange={handleTicketChange} />
-      <label>Ticket Price ($):</label>
+      <label className="font-semibold">🎟 Number of Disneyland Tickets:</label>
       <input
+        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        type="number"
+        value={ticketCount}
+        onChange={handleTicketChange}
+        min="0"
+      />
+      <label className="font-semibold">﹩ Ticket Price ($):</label>
+      <input
+        className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
         type="number"
         value={ticketPrice}
         onChange={handleTicketPriceChange}
