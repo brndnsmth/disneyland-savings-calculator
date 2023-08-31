@@ -40,8 +40,17 @@ function App(): JSX.Element {
     );
 
     // Calculate savings per week
+    // const savingsPerWeek: string = (totalCost / weeksUntilTrip).toFixed(2);
+    // return savingsPerWeek;
+
+    // Calculate savings per week, per month, and per day
+    const savingsPerDay: string = (totalCost / daysCount).toFixed(2);
     const savingsPerWeek: string = (totalCost / weeksUntilTrip).toFixed(2);
-    return savingsPerWeek;
+    const savingsPerMonth: string = (totalCost / (weeksUntilTrip / 4)).toFixed(
+      2
+    );
+
+    return `${savingsPerWeek} (per week) - ${savingsPerMonth} (per month) - ${savingsPerDay} (per day)`;
   };
 
   return (

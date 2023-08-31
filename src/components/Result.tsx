@@ -14,6 +14,9 @@ const Result: React.FC<ResultProps> = ({ savingsGoal }: ResultProps) => {
       {isValidInput ? (
         <div>
           <p className="text-xl">
+            ${(parseFloat(savingsGoal) / 7).toFixed(2)} per day
+          </p>
+          <p className="text-xl">
             ${parseFloat(savingsGoal).toFixed(2)} per week
           </p>
           <p className="text-xl">
@@ -22,6 +25,7 @@ const Result: React.FC<ResultProps> = ({ savingsGoal }: ResultProps) => {
         </div>
       ) : (
         <div>
+          <p>- per day</p>
           <p>- per week</p>
           <p>- per month</p>
         </div>
