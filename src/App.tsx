@@ -59,7 +59,12 @@ function App(): JSX.Element {
         <h1 className="text-4xl font-semibold text-white mb-3">
           Disneyland Savings Calculator
         </h1>
-        <div className="grid grid-cols-2 gap-4">
+        <h2 className="text-2xl font-semibold text-white mb-3">Anaheim, CA</h2>
+        <p className="text-white mb-3">
+          One aspect that visitors should be aware of when planning their trip
+          is how Disneyland ticket prices can fluctuate throughout the year.
+        </p>
+        <div className="grid grid-cols-2 gap-4 mb-3">
           <div className="bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
             <DateInput tripDate={tripDate} setTripDate={setTripDate} />
             <TicketInput
@@ -93,6 +98,18 @@ function App(): JSX.Element {
             )}
           </div>
         </div>
+        <p className="text-white">
+          Disclaimer: It's important to note that the savings calculator
+          provided here is merely an estimator and does not represent the actual
+          price you would pay for Disneyland tickets. The actual cost of
+          admission can vary significantly depending on the factors mentioned
+          above. Therefore, it's advisable to check the official Disneyland
+          Resort website or contact the park directly for the most accurate and
+          up-to-date pricing information before planning your trip. Disneyland's
+          pricing strategy is designed to accommodate various budgets and
+          preferences, ensuring that the magic of Disney remains accessible to
+          all visitors.
+        </p>
       </div>
     </div>
   );
