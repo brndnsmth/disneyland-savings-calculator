@@ -22,10 +22,10 @@ const TotalExpenditure: React.FC<TotalExpenditureProps> = ({
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold">
+      <h2 className="text-3xl font-semibold mb-2">
         💸 Total Estimated Expenditure:
       </h2>
-      <p className="text-xl">${calculateTotalCost().toFixed(2)}</p>
+      <p className="text-2xl">${calculateTotalCost().toFixed(2)}</p>
     </div>
   );
 };

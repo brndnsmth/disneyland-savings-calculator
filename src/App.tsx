@@ -54,17 +54,36 @@ function App(): JSX.Element {
   };
 
   return (
-    <div className="h-screen grid grid-cols-1 content-center">
+    <div className="min-h-screen grid grid-cols-1 content-center m-2">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-semibold text-white mb-3">
-          Disneyland Savings Calculator
-        </h1>
+        <div className="flex items-center">
+          <h1 className="text-6xl font-disney font-semibold text-white">
+            Disneyland Savings Calculator
+          </h1>
+          <img
+            className="rotate-image drop-shadow-md"
+            src="/src/assets/mickey.png"
+            width="100px"
+            alt="Mickey Mouse"
+          />
+        </div>
         <h2 className="text-2xl font-semibold text-white mb-3">Anaheim, CA</h2>
         <p className="text-white mb-3">
-          One aspect that visitors should be aware of when planning their trip
-          is how Disneyland ticket prices can fluctuate throughout the year.
+          Calculate how much money should be saved per day, week, or month to
+          afford a trip to Disneyland in Anaheim, California. However, one
+          aspect that visitors should be aware of when planning their trip is
+          how Disneyland ticket prices can fluctuate throughout the year. View
+          current{" "}
+          <a
+            className="text-amber-200 hover:underline"
+            href="https://disneyland.disney.go.com/admission/tickets/"
+            target="_blank"
+          >
+            Disneyland ticket prices
+          </a>
+          .
         </p>
-        <div className="grid grid-cols-2 gap-4 mb-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
           <div className="bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
             <DateInput tripDate={tripDate} setTripDate={setTripDate} />
             <TicketInput
@@ -83,10 +102,13 @@ function App(): JSX.Element {
           </div>
           <div className="grid justify-items-center bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl text-center">
             {isNaN(parseFloat(calculateSavingsGoal())) ? (
-              <p>Please fill in all required fields.</p>
+              <p className="text-2xl flex items-center">
+                Please fill in all fields.
+              </p>
             ) : (
               <>
                 <Result savingsGoal={calculateSavingsGoal()} />
+                <hr className="w-48 h-1 mx-auto my-4 bg-blue-300 border-0 rounded" />
                 <TotalExpenditure
                   ticketCount={ticketCount}
                   ticketPrice={ticketPrice}
@@ -98,17 +120,21 @@ function App(): JSX.Element {
             )}
           </div>
         </div>
+        <p className="text-white mb-3">
+          <span className="font-bold">Disclaimer:</span> It's important to note
+          that the savings calculator provided here is merely an estimator and
+          does not represent the actual price you would pay for Disneyland
+          tickets. The actual cost of admission can vary significantly depending
+          on the factors mentioned above. Therefore, it's advisable to check the
+          official Disneyland Resort website or contact the park directly for
+          the most accurate and up-to-date pricing information before planning
+          your trip. Disneyland's pricing strategy is designed to accommodate
+          various budgets and preferences, ensuring that the magic of Disney
+          remains accessible to all visitors.
+        </p>
         <p className="text-white">
-          Disclaimer: It's important to note that the savings calculator
-          provided here is merely an estimator and does not represent the actual
-          price you would pay for Disneyland tickets. The actual cost of
-          admission can vary significantly depending on the factors mentioned
-          above. Therefore, it's advisable to check the official Disneyland
-          Resort website or contact the park directly for the most accurate and
-          up-to-date pricing information before planning your trip. Disneyland's
-          pricing strategy is designed to accommodate various budgets and
-          preferences, ensuring that the magic of Disney remains accessible to
-          all visitors.
+          Mickey Mouse and all related characters and elements are trademarks of
+          and copyright Disney Enterprises, Inc.
         </p>
       </div>
     </div>
