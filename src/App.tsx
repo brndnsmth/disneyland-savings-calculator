@@ -6,6 +6,7 @@ import DaysInput from "./components/DaysInput";
 import NightsInput from "./components/NightsInput";
 import Result from "./components/Result";
 import TotalExpenditure from "./components/TotalExpenditure";
+import mickey from "./assets/mickey.png";
 
 function App(): JSX.Element {
   const [tripDate, setTripDate] = useState<string>("");
@@ -62,7 +63,7 @@ function App(): JSX.Element {
           </h1>
           <img
             className="rotate-image drop-shadow-md"
-            src="/src/assets/mickey.png"
+            src={mickey}
             width="100px"
             alt="Mickey Mouse"
           />
