@@ -72,6 +72,15 @@ function App(): JSX.Element {
   const { savingsPerDay, savingsPerWeek, savingsPerMonth } =
     calculateSavingsGoal();
 
+  const resetFields = () => {
+    setTripDate("");
+    setTicketCount(0);
+    setDaysCount(0);
+    setNightsCount(0);
+    setTicketPrice(100); // Default ticket price
+    setHotelPrice(120); // Default hotel price
+  };
+
   return (
     <div className="min-h-screen grid grid-cols-1 content-center m-2">
       <div className="container mx-auto">
@@ -144,6 +153,14 @@ function App(): JSX.Element {
                   nightsCount={nightsCount}
                   hotelPrice={hotelPrice}
                 />
+                <div className="text-center mt-4">
+                  <button
+                    className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+                    onClick={resetFields}
+                  >
+                    Reset
+                  </button>
+                </div>
               </>
             )}
           </div>
