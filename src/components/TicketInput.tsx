@@ -1,4 +1,3 @@
-// TicketInput.tsx
 import React, { ChangeEvent } from "react";
 
 interface TicketInputProps {
@@ -19,6 +18,9 @@ const TicketInput: React.FC<TicketInputProps> = ({
     if (!isNaN(inputVal)) {
       // Only update the state if the input is a valid number
       setTicketCount(inputVal);
+    } else {
+      // Clear the input field if the value is not a valid number
+      setTicketCount(0);
     }
   };
 
@@ -27,6 +29,9 @@ const TicketInput: React.FC<TicketInputProps> = ({
     if (!isNaN(inputVal)) {
       // Only update the state if the input is a valid number
       setTicketPrice(inputVal);
+    } else {
+      // Clear the input field if the value is not a valid number
+      setTicketPrice(0);
     }
   };
 
@@ -38,17 +43,19 @@ const TicketInput: React.FC<TicketInputProps> = ({
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={isNaN(ticketCount) ? "" : ticketCount}
+        value={ticketCount === 0 ? "" : ticketCount}
         onChange={handleTicketChange}
         min="0"
+        inputMode="numeric" // Enable numeric keyboard
       />
       <label className="font-semibold">﹩ Ticket Price ($):</label>
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={isNaN(ticketPrice) ? "" : ticketPrice}
+        value={ticketPrice === 0 ? "" : ticketPrice}
         onChange={handleTicketPriceChange}
         min="0"
+        inputMode="numeric" // Enable numeric keyboard
       />
     </div>
   );

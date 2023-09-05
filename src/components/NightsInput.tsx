@@ -1,4 +1,3 @@
-// NightsInput.tsx
 import React, { ChangeEvent } from "react";
 
 interface NightsInputProps {
@@ -19,6 +18,9 @@ const NightsInput: React.FC<NightsInputProps> = ({
     if (!isNaN(inputVal)) {
       // Only update the state if the input is a valid number
       setNightsCount(inputVal);
+    } else {
+      // Clear the input field if the value is not a valid number
+      setNightsCount(0);
     }
   };
 
@@ -27,6 +29,9 @@ const NightsInput: React.FC<NightsInputProps> = ({
     if (!isNaN(inputVal)) {
       // Only update the state if the input is a valid number
       setHotelPrice(inputVal);
+    } else {
+      // Clear the input field if the value is not a valid number
+      setHotelPrice(0);
     }
   };
 
@@ -36,17 +41,19 @@ const NightsInput: React.FC<NightsInputProps> = ({
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={isNaN(nightsCount) ? "" : nightsCount}
+        value={nightsCount === 0 ? "" : nightsCount}
         onChange={handleNightsChange}
         min="0"
+        inputMode="numeric" // Enable numeric keyboard
       />
       <label className="font-semibold">﹩ Hotel Price ($):</label>
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={isNaN(hotelPrice) ? "" : hotelPrice}
+        value={hotelPrice === 0 ? "" : hotelPrice}
         onChange={handleHotelPriceChange}
         min="0"
+        inputMode="numeric" // Enable numeric keyboard
       />
     </div>
   );
