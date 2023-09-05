@@ -1,4 +1,3 @@
-// DateInput.tsx
 import React, { ChangeEvent } from "react";
 
 interface DateInputProps {
@@ -13,16 +12,17 @@ const DateInput: React.FC<DateInputProps> = ({
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const selectedDate = e.target.value;
     const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 1); // Subtract 1 day from the current date
 
     // Parse the selected date to a Date object
     const selectedDateObj = new Date(selectedDate);
 
-    // Check if the selected date is in the past
-    if (selectedDateObj < currentDate) {
+    // Check if the selected date is in the past or the same day
+    if (selectedDateObj <= currentDate) {
       // Display an error message
-      alert("Please select a future date.");
+      alert("Please select a future date or today.");
     } else {
-      // Set the tripDate state only if it's a future date
+      // Set the tripDate state
       setTripDate(selectedDate);
     }
   };

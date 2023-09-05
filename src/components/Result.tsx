@@ -25,7 +25,8 @@ const Result: React.FC<ResultProps> = ({
     (tripDateObj.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
   );
 
-  // Define variables to determine whether to show per week and per month
+  // Define variables to determine whether to show per day, week, and per month
+  const showPerDay = daysUntilTrip >= 1;
   const showPerWeek = daysUntilTrip >= 7;
   const showPerMonth = daysUntilTrip >= 30;
 
@@ -34,17 +35,19 @@ const Result: React.FC<ResultProps> = ({
       <h2 className="text-3xl font-semibold mb-2">💰 Your Savings Goal:</h2>
       {isValidInput ? (
         <div>
-          <p className="text-2xl">${savingsPerDay} per day</p>
-          {showPerWeek && (
-            <p className="text-2xl">${savingsPerWeek} per week</p>
-          )}
-          {showPerMonth && (
-            <p className="text-2xl">${savingsPerMonth} per month</p>
-          )}
+          <p className="text-2xl">
+            {showPerDay ? `$${savingsPerDay} per day` : "- per day"}
+          </p>
+          <p className="text-2xl">
+            {showPerWeek ? `$${savingsPerWeek} per week` : "- per week"}
+          </p>
+          <p className="text-2xl">
+            {showPerMonth ? `$${savingsPerMonth} per month` : "- per month"}
+          </p>
         </div>
       ) : (
         <div>
-          <p>- per day</p>
+          {!showPerDay && <p>- per day</p>}
           {!showPerWeek && <p>- per week</p>}
           {!showPerMonth && <p>- per month</p>}
         </div>
