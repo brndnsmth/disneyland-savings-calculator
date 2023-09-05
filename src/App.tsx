@@ -79,6 +79,9 @@ function App(): JSX.Element {
     setNightsCount(0);
     setTicketPrice(100); // Default ticket price
     setHotelPrice(120); // Default hotel price
+
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
