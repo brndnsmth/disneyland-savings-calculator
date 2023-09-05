@@ -2,32 +2,51 @@
 import React from "react";
 
 interface ResultProps {
-  savingsGoal: string;
+  savingsPerDay: string;
+  savingsPerWeek: string;
+  savingsPerMonth: string;
+  tripDate: string;
 }
 
-const Result: React.FC<ResultProps> = ({ savingsGoal }: ResultProps) => {
-  const isValidInput = !isNaN(parseFloat(savingsGoal));
+const Result: React.FC<ResultProps> = ({
+  savingsPerDay,
+  savingsPerWeek,
+  savingsPerMonth,
+  tripDate,
+}: ResultProps) => {
+  const isValidInput = !isNaN(parseFloat(savingsPerDay));
+
+  // Parse the trip date to a Date object
+  const tripDateObj = new Date(tripDate);
+  const currentDate = new Date();
+
+  // Calculate the time difference in days between tripDate and currentDate
+  const daysUntilTrip = Math.ceil(
+    (tripDateObj.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  // Define variables to determine whether to show per week and per month
+  const showPerWeek = daysUntilTrip >= 7;
+  const showPerMonth = daysUntilTrip >= 30;
 
   return (
     <div>
       <h2 className="text-3xl font-semibold mb-2">💰 Your Savings Goal:</h2>
       {isValidInput ? (
         <div>
-          <p className="text-2xl">
-            ${(parseFloat(savingsGoal) / 7).toFixed(2)} per day
-          </p>
-          <p className="text-2xl">
-            ${parseFloat(savingsGoal).toFixed(2)} per week
-          </p>
-          <p className="text-2xl">
-            ${(parseFloat(savingsGoal) * 4).toFixed(2)} per month
-          </p>
+          <p className="text-2xl">${savingsPerDay} per day</p>
+          {showPerWeek && (
+            <p className="text-2xl">${savingsPerWeek} per week</p>
+          )}
+          {showPerMonth && (
+            <p className="text-2xl">${savingsPerMonth} per month</p>
+          )}
         </div>
       ) : (
         <div>
           <p>- per day</p>
-          <p>- per week</p>
-          <p>- per month</p>
+          {!showPerWeek && <p>- per week</p>}
+          {!showPerMonth && <p>- per month</p>}
         </div>
       )}
     </div>

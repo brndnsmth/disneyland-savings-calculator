@@ -11,7 +11,20 @@ const DateInput: React.FC<DateInputProps> = ({
   setTripDate,
 }: DateInputProps) => {
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setTripDate(e.target.value);
+    const selectedDate = e.target.value;
+    const currentDate = new Date();
+
+    // Parse the selected date to a Date object
+    const selectedDateObj = new Date(selectedDate);
+
+    // Check if the selected date is in the past
+    if (selectedDateObj < currentDate) {
+      // Display an error message
+      alert("Please select a future date.");
+    } else {
+      // Set the tripDate state only if it's a future date
+      setTripDate(selectedDate);
+    }
   };
 
   return (

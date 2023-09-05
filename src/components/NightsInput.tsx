@@ -15,11 +15,19 @@ const NightsInput: React.FC<NightsInputProps> = ({
   setHotelPrice,
 }: NightsInputProps) => {
   const handleNightsChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setNightsCount(parseInt(e.target.value));
+    const inputVal = parseInt(e.target.value);
+    if (!isNaN(inputVal)) {
+      // Only update the state if the input is a valid number
+      setNightsCount(inputVal);
+    }
   };
 
   const handleHotelPriceChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setHotelPrice(parseFloat(e.target.value));
+    const inputVal = parseFloat(e.target.value);
+    if (!isNaN(inputVal)) {
+      // Only update the state if the input is a valid number
+      setHotelPrice(inputVal);
+    }
   };
 
   return (
@@ -28,7 +36,7 @@ const NightsInput: React.FC<NightsInputProps> = ({
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={nightsCount}
+        value={isNaN(nightsCount) ? "" : nightsCount}
         onChange={handleNightsChange}
         min="0"
       />
@@ -36,8 +44,9 @@ const NightsInput: React.FC<NightsInputProps> = ({
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={hotelPrice}
+        value={isNaN(hotelPrice) ? "" : hotelPrice}
         onChange={handleHotelPriceChange}
+        min="0"
       />
     </div>
   );

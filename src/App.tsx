@@ -16,9 +16,14 @@ function App(): JSX.Element {
   const [ticketPrice, setTicketPrice] = useState<number>(100); // Default ticket price
   const [hotelPrice, setHotelPrice] = useState<number>(120); // Default hotel price
 
-  const calculateSavingsGoal = (): string => {
+  // Calculate savingsPerDay, savingsPerWeek, and savingsPerMonth
+  const calculateSavingsGoal = (): {
+    savingsPerDay: string;
+    savingsPerWeek: string;
+    savingsPerMonth: string;
+  } => {
     // Check if any of the required input fields are NaN
-    if (
+    /*if (
       isNaN(ticketCount) ||
       isNaN(daysCount) ||
       isNaN(nightsCount) ||
@@ -26,8 +31,12 @@ function App(): JSX.Element {
       isNaN(hotelPrice) ||
       tripDate === ""
     ) {
-      return "NaN";
-    }
+      return {
+        savingsPerDay: "NaN",
+        savingsPerWeek: "NaN",
+        savingsPerMonth: "NaN",
+      };
+    } */
 
     // Calculate total cost based on user inputs
     const totalCost: number =
@@ -36,29 +45,38 @@ function App(): JSX.Element {
     // Calculate weeks until the trip
     const today: Date = new Date();
     const tripDateObj: Date = new Date(tripDate);
-    const weeksUntilTrip: number = Math.ceil(
-      (tripDateObj.getTime() - today.getTime()) / (1000 * 60 * 60 * 24 * 7)
+    const daysUntilTrip: number = Math.ceil(
+      (tripDateObj.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    // Calculate savings per week
-    // const savingsPerWeek: string = (totalCost / weeksUntilTrip).toFixed(2);
-    // return savingsPerWeek;
+    // Calculate savings per day
+    const savingsPerDay: string = (totalCost / daysUntilTrip).toFixed(2);
+    // console.log(savingsPerDay);
 
-    // Calculate savings per week, per month, and per day
-    const savingsPerDay: string = (totalCost / daysCount).toFixed(2);
-    const savingsPerWeek: string = (totalCost / weeksUntilTrip).toFixed(2);
-    const savingsPerMonth: string = (totalCost / (weeksUntilTrip / 4)).toFixed(
+    // Calculate savings per week and per month
+    const savingsPerWeek: string = ((totalCost / daysUntilTrip) * 7).toFixed(2);
+    // console.log(savingsPerWeek);
+    const savingsPerMonth: string = ((totalCost / daysUntilTrip) * 30).toFixed(
       2
     );
+    // console.log(savingsPerMonth);
 
-    return `${savingsPerWeek} (per week) - ${savingsPerMonth} (per month) - ${savingsPerDay} (per day)`;
+    return {
+      savingsPerDay,
+      savingsPerWeek,
+      savingsPerMonth,
+    };
   };
+
+  // Calculate savings values
+  const { savingsPerDay, savingsPerWeek, savingsPerMonth } =
+    calculateSavingsGoal();
 
   return (
     <div className="min-h-screen grid grid-cols-1 content-center m-2">
       <div className="container mx-auto">
         <div className="flex items-center">
-          <h1 className="text-6xl font-disney font-semibold text-white">
+          <h1 className="text-6xl font-disney font-semibold text-white drop-shadow-md">
             Disneyland Savings Calculator
           </h1>
           <img
@@ -68,7 +86,9 @@ function App(): JSX.Element {
             alt="Mickey Mouse"
           />
         </div>
-        <h2 className="text-2xl font-semibold text-white mb-3">Anaheim, CA</h2>
+        <h2 className="text-2xl font-semibold text-white drop-shadow-md mb-3">
+          Anaheim, CA
+        </h2>
         <p className="text-white mb-3">
           Calculate how much money should be saved per day, week, or month to
           afford a trip to Disneyland in Anaheim, California. However, one
@@ -102,13 +122,20 @@ function App(): JSX.Element {
             />
           </div>
           <div className="grid justify-items-center bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl text-center">
-            {isNaN(parseFloat(calculateSavingsGoal())) ? (
+            {isNaN(parseFloat(savingsPerDay)) ||
+            isNaN(parseFloat(savingsPerWeek)) ||
+            isNaN(parseFloat(savingsPerMonth)) ? (
               <p className="text-2xl flex items-center">
                 Please fill in all fields.
               </p>
             ) : (
               <>
-                <Result savingsGoal={calculateSavingsGoal()} />
+                <Result
+                  savingsPerDay={savingsPerDay}
+                  savingsPerWeek={savingsPerWeek}
+                  savingsPerMonth={savingsPerMonth}
+                  tripDate={tripDate}
+                />
                 <hr className="w-48 h-1 mx-auto my-4 bg-blue-300 border-0 rounded" />
                 <TotalExpenditure
                   ticketCount={ticketCount}

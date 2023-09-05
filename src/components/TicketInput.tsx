@@ -15,11 +15,19 @@ const TicketInput: React.FC<TicketInputProps> = ({
   setTicketPrice,
 }: TicketInputProps) => {
   const handleTicketChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setTicketCount(parseInt(e.target.value));
+    const inputVal = parseInt(e.target.value);
+    if (!isNaN(inputVal)) {
+      // Only update the state if the input is a valid number
+      setTicketCount(inputVal);
+    }
   };
 
   const handleTicketPriceChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setTicketPrice(parseFloat(e.target.value));
+    const inputVal = parseFloat(e.target.value);
+    if (!isNaN(inputVal)) {
+      // Only update the state if the input is a valid number
+      setTicketPrice(inputVal);
+    }
   };
 
   return (
@@ -30,7 +38,7 @@ const TicketInput: React.FC<TicketInputProps> = ({
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={ticketCount}
+        value={isNaN(ticketCount) ? "" : ticketCount}
         onChange={handleTicketChange}
         min="0"
       />
@@ -38,8 +46,9 @@ const TicketInput: React.FC<TicketInputProps> = ({
       <input
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3"
         type="number"
-        value={ticketPrice}
+        value={isNaN(ticketPrice) ? "" : ticketPrice}
         onChange={handleTicketPriceChange}
+        min="0"
       />
     </div>
   );
